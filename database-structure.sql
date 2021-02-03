@@ -1,0 +1,24 @@
+
+CREATE DATABASE dataplor;
+
+CREATE TABLE csv(
+	id INT NOT NULL,
+	parent_id INT NULL
+);
+
+
+/*
+
+--TESTING DATA
+
+INSERT INTO csv VALUES(  '125', '130' );
+
+INSERT INTO csv VALUES(  '130', NULL );
+
+INSERT INTO csv VALUES(  '2820230', '125' );
+
+INSERT INTO csv VALUES(  '4430546', '125' );
+
+INSERT INTO csv VALUES(  '5497637', '4430546' );
+
+*/
