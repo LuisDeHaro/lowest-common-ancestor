@@ -16,6 +16,7 @@ get "/common_ancestor" do
   
   a = params[:a]
   b = params[:b]
+  query_type = params[:query_type] # -> ltree or recursive
 
   # throwing 400 if we don't have the proper inputs
   halt 400 if !a || !b
@@ -24,14 +25,31 @@ get "/common_ancestor" do
 
     # connecting to the database
     conection = PG.connect host: 'localhost', 
-    					   dbname: 'dataplor',
-    					   user: 'postgres', 
-    					   password: 'mandarina'
+    					 	dbname: 'dataplor',
+    					  user: 'postgres', 
+    					  password: 'mandarina'
 
     # reading data from the database
-    query_result = conection.exec Utils.sql_query_text( conection.escape(a), conection.escape(b) )
+    # deciding which query to use for the results
 
-	# if we have data, we proceed 
+    if query_type and query_type == 'ltree'
+
+    	query_result = conection.exec Utils.sql_query_text_ltree( 
+				conection.escape(a), 
+				conection.escape(b) 
+			)
+
+    else
+
+    	# recursive is used by default
+    	query_result = conection.exec Utils.sql_query_text_recursive( 
+				conection.escape(a), 
+				conection.escape(b) 
+			)
+
+   	end
+    
+		# if we have data, we proceed 
     if query_result.cmd_tuples > 0
     	
     	# the first row is the root_id we are looking for
