@@ -81,7 +81,7 @@ Table indexes:
 
 1. Clone this repo
 2. Make sure you have a PGSQL server running
-3. Connect to the PG server and create the needed databases, tables, indexes and testa data (database-structure.sql)
+3. Connect to the PG server and create the needed databases, tables, indexes and test data (database-structure.sql)
 4. Open a terminal and inside the project's folder run: `ruby app.rb -s Puma`
 5. Make a GET request to the server. For example:
 `http://localhost:3000/common_ancestor?a=4430546&b=4430546`
